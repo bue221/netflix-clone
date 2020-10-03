@@ -1,0 +1,59 @@
+.movie{
+        margin-bottom: 30px;
+}
+
+.movie h1 {
+    margin: 0px 0px 0px 30px;
+}
+
+.movierow {
+        overflow-x: hidden;
+        padding-left: 30px;
+}
+.row {
+        transition: ease all 0.5s;
+}
+
+.item {
+        display: inline-block;
+        width: 150px;
+}
+
+.item img {
+        width: 100%;
+        transform: scale(.9);
+        transition: all ease 0.5s;
+        cursor: pointer;
+}
+
+.item img:hover {
+        transform: scale(1);
+}
+
+.left, .right {
+        position: absolute;
+        width: 40px;
+        height: 250px;
+        background-color: rgba(0,0,0, 0.6);
+        z-index: 99;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        overflow: hidden;
+        cursor: pointer;
+        opacity: 0;
+        transition: ease all 0.5s;
+}
+
+.left{
+        left: 0;
+}
+
+.right {
+        right: 0;
+}
+
+.movie:hover .left,
+.movie:hover .right {
+        opacity: 1;
+}

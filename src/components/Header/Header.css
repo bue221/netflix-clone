@@ -1,0 +1,92 @@
+.header{
+        height: 100vh;
+	    background-position: center;
+	    background-size: cover;
+}
+
+.vertical {
+	width: inherit;
+	height: inherit;
+	background: linear-gradient(to top, #111 10%, transparent 90%);
+}
+
+.horizontal {
+	width: inherit;
+	height: inherit;
+	background: linear-gradient(to right, #111 30%, transparent 70%);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding-left: 20px;
+	padding-bottom: 150px;
+	padding-top: 80px;
+}
+
+.name{
+	font-size: 60px;
+	font-weight: bold;
+}
+
+.info {
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 1rem;
+}
+
+.points {
+	display: inline-block;
+	color: 	#46d369;
+	margin-right: 15px;
+}
+
+.year{
+	display: inline-block;
+	margin-right: 15px;
+}
+
+.seasons {
+	display: inline-block;
+	margin-right: 15px;
+}
+
+.description {
+	max-width: 40%;
+	margin-top: 15px;
+	color: #999;
+	font-size: 20px;
+}
+
+.botones {
+	margin-top: 15px;
+}
+
+.ver, .lista{
+	display: inline-block;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 15px 25px;
+	border-radius: 5px;
+	text-decoration: none;
+	margin-right: 10px;
+	opacity: 1;
+}
+
+.ver {
+	color: black;
+	background-color: #fff;
+}
+
+.lista{
+	color: white;
+	background-color: #333;
+}
+
+.ver:hover, .lista:hover {
+	opacity: 0.7;
+}
+
+.generos{
+	margin-top: 15px;
+	font-size: 18px;
+	color: #333;
+}
