@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { formatSeasons, matchPercentage, type Title } from '../../domain/title';
 import { useAsyncResource } from '../../hooks/useAsyncResource';
-import { canAutoplayBackgroundVideo, useIsActivelyVisible } from '../../hooks/useBackgroundVideo';
+import { canAutoplayBackgroundVideo, useIsActivelyVisible, useUserEngaged } from '../../hooks/useBackgroundVideo';
 import { useCatalogService } from '../../services/CatalogServiceContext';
-import { backdropSrcSet, imageUrl } from '../../services/tmdb/images';
+import { backdropSrcSet, imageUrl, logoSrcSet, posterSrcSet } from '../../services/tmdb/images';
 import { useTitleActions } from '../../state/titleActions';
 import { Button, IconButton } from '../ui/Button';
 import { InfoIcon, PlayIcon, VolumeOffIcon, VolumeUpIcon } from '../ui/Icons';
@@ -18,6 +18,8 @@ interface BillboardProps {
 const TRAILER_START_DELAY_MS = 2500;
 /** Once the trailer has played for a while the synopsis collapses so the video is visible. */
 const COMPACT_AFTER_MS = 7000;
+/** Matches the `w500` TMDB logo size requested below. */
+const LOGO_WIDTH = 500;
 
 export function Billboard({ title }: BillboardProps) {
   const { openDetails, detailsOpen } = useTitleActions();
@@ -25,6 +27,7 @@ export function Billboard({ title }: BillboardProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const visible = useIsActivelyVisible(sectionRef);
   const [autoplayAllowed] = useState(canAutoplayBackgroundVideo);
+  const engaged = useUserEngaged();
   const [trailerStarted, setTrailerStarted] = useState(false);
   const [compact, setCompact] = useState(false);
   const [muted, setMuted] = useState(true);
@@ -37,10 +40,10 @@ export function Billboard({ title }: BillboardProps) {
   const paused = !visible || detailsOpen;
 
   useEffect(() => {
-    if (!trailerKey || trailerStarted || paused) return;
+    if (!trailerKey || trailerStarted || paused || !engaged) return;
     const timer = setTimeout(() => setTrailerStarted(true), TRAILER_START_DELAY_MS);
     return () => clearTimeout(timer);
-  }, [trailerKey, trailerStarted, paused]);
+  }, [trailerKey, trailerStarted, paused, engaged]);
 
   useEffect(() => {
     if (!trailerStarted || compact || paused) return;
@@ -59,21 +62,39 @@ export function Billboard({ title }: BillboardProps) {
       aria-labelledby="billboard-title"
     >
       <div className={styles.media}>
-        <img
-          className={styles.backdrop}
-          src={imageUrl(title.backdropPath, 'original') ?? undefined}
-          srcSet={backdropSrcSet(title.backdropPath)}
-          sizes="100vw"
-          alt=""
-          fetchPriority="high"
-        />
+        <picture>
+          {/* Portrait screens get the poster, like the Netflix mobile app, instead of a heavily cropped backdrop. */}
+          {title.posterPath && (
+            <source media="(max-width: 800px)" srcSet={posterSrcSet(title.posterPath)} sizes="100vw" />
+          )}
+          <img
+            className={styles.backdrop}
+            src={imageUrl(title.backdropPath, 'original') ?? undefined}
+            srcSet={backdropSrcSet(title.backdropPath)}
+            sizes="100vw"
+            alt=""
+            fetchPriority="high"
+          />
+        </picture>
         {trailerStarted && trailerKey && <BillboardTrailer videoKey={trailerKey} muted={muted} paused={paused} />}
         <div className={styles.vignette} />
       </div>
 
       <div className={styles.info}>
         <h2 id="billboard-title" className={styles.title}>
-          {logo ? <img className={styles.logo} src={logo} alt={title.name} /> : title.name}
+          {logo ? (
+            <img
+              className={styles.logo}
+              src={logo}
+              srcSet={logoSrcSet(details?.logoPath ?? null)}
+              sizes="(max-width: 800px) 45vw, 30vw"
+              alt={title.name}
+              width={LOGO_WIDTH}
+              height={details?.logoAspectRatio ? Math.round(LOGO_WIDTH / details.logoAspectRatio) : undefined}
+            />
+          ) : (
+            title.name
+          )}
         </h2>
         <div className={styles.details}>
           <p className={styles.meta}>

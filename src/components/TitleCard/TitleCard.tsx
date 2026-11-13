@@ -14,6 +14,12 @@ interface TitleCardProps {
 }
 
 const HOVER_INTENT_MS = 450;
+/**
+ * Mirrors the `--items` breakpoints in Row.module.css. Erring generous here makes phones
+ * download the 780px backdrop for cards that are ~300 device pixels wide.
+ */
+const CARD_SIZES =
+  '(max-width: 500px) 41vw, (max-width: 800px) 30vw, (max-width: 1100px) 23vw, (max-width: 1400px) 18vw, 15vw';
 /** Grace period so moving the pointer from the card onto the preview does not close it. */
 const LEAVE_GRACE_MS = 80;
 
@@ -102,7 +108,7 @@ function CardArtwork({ title, variant }: { title: Title; variant: RowVariant }) 
           className={styles.image}
           src={imageUrl(title.backdropPath, 'w300')}
           srcSet={backdropSrcSet(title.backdropPath)}
-          sizes="(max-width: 500px) 50vw, (max-width: 800px) 34vw, (max-width: 1100px) 25vw, 18vw"
+          sizes={CARD_SIZES}
           alt=""
           fallbackLabel={title.name}
         />

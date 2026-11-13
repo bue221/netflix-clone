@@ -72,6 +72,10 @@ p {
   white-space: nowrap;
 }
 
+.page-fallback {
+  min-height: 100vh;
+}
+
 .skip-link {
   position: fixed;
   top: -100px;

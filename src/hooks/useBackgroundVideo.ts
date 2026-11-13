@@ -15,6 +15,25 @@ export function canAutoplayBackgroundVideo(): boolean {
   );
 }
 
+const ENGAGEMENT_EVENTS = ['pointermove', 'pointerdown', 'keydown', 'scroll', 'touchstart'] as const;
+
+/**
+ * Becomes true after the first user interaction. Heavy third-party embeds (the YouTube
+ * player is ~1 MB and sets cookies) wait for it so the initial load stays lean.
+ */
+export function useUserEngaged(): boolean {
+  const [engaged, setEngaged] = useState(false);
+
+  useEffect(() => {
+    if (engaged) return;
+    const onEngage = () => setEngaged(true);
+    ENGAGEMENT_EVENTS.forEach((type) => window.addEventListener(type, onEngage, { once: true, passive: true }));
+    return () => ENGAGEMENT_EVENTS.forEach((type) => window.removeEventListener(type, onEngage));
+  }, [engaged]);
+
+  return engaged;
+}
+
 /** True while the element is mostly on screen and the tab is visible. */
 export function useIsActivelyVisible(ref: RefObject<Element | null>, threshold = 0.4): boolean {
   const [inView, setInView] = useState(true);

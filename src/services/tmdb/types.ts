@@ -23,6 +23,7 @@ export interface TmdbPage<T> {
 
 interface TmdbImage {
   file_path: string;
+  aspect_ratio?: number;
   iso_639_1: string | null;
   vote_average: number;
 }

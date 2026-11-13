@@ -26,14 +26,14 @@ export function toTitles(items: readonly TmdbListItem[], fallbackType: MediaType
   return items.map((item) => toTitle(item, fallbackType)).filter((title): title is Title => title !== null);
 }
 
-function pickLogo(details: TmdbDetails, language: string): string | null {
+function pickLogo(details: TmdbDetails, language: string) {
   const logos = details.images?.logos ?? [];
   const lang = language.split('-')[0];
-  const best =
+  return (
     logos.find((logo) => logo.iso_639_1 === lang) ??
     logos.find((logo) => logo.iso_639_1 === 'en') ??
-    logos[0];
-  return best?.file_path ?? null;
+    logos[0]
+  );
 }
 
 function pickTrailer(details: TmdbDetails): string | null {
@@ -77,6 +77,7 @@ export function toTitleDetails(
   { language, region }: { language: string; region: string },
 ): TitleDetails {
   const base = toTitle({ ...details, media_type: mediaType }, mediaType) as Title;
+  const logo = pickLogo(details, language);
   return {
     ...base,
     overview: pickOverview(details, language),
@@ -84,7 +85,8 @@ export function toTitleDetails(
     tagline: details.tagline ?? '',
     runtimeMinutes: details.runtime ?? details.episode_run_time?.[0] ?? null,
     seasons: details.number_of_seasons ?? null,
-    logoPath: pickLogo(details, language),
+    logoPath: logo?.file_path ?? null,
+    logoAspectRatio: logo?.aspect_ratio && logo.aspect_ratio > 0 ? logo.aspect_ratio : null,
     trailerKey: pickTrailer(details),
     certification: pickCertification(details, region),
     cast: [...(details.credits?.cast ?? [])]

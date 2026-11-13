@@ -255,4 +255,8 @@
   .side {
     display: none;
   }
+
+  .backdrop {
+    object-position: center top;
+  }
 }

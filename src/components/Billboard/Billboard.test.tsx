@@ -20,6 +20,7 @@ const details: TitleDetails = {
   runtimeMinutes: null,
   seasons: 2,
   logoPath: null,
+  logoAspectRatio: null,
   trailerKey: 'abc123',
   certification: '16+',
   cast: [],
@@ -48,7 +49,7 @@ describe('Billboard trailer', () => {
     vi.unstubAllGlobals();
   });
 
-  it('starts a muted trailer after a pause and lets the user toggle sound', async () => {
+  it('starts a muted trailer after the first interaction and lets the user toggle sound', async () => {
     mockMatchMedia((query) => query.includes('min-width'));
     renderBillboard();
     await act(async () => {
@@ -56,6 +57,12 @@ describe('Billboard trailer', () => {
     });
     expect(screen.queryByTitle('Avance del título destacado')).not.toBeInTheDocument();
 
+    await act(async () => {
+      vi.advanceTimersByTime(5000);
+    });
+    expect(screen.queryByTitle('Avance del título destacado')).not.toBeInTheDocument();
+
+    fireEvent.pointerMove(window);
     await act(async () => {
       vi.advanceTimersByTime(2500);
     });

@@ -19,6 +19,8 @@ export interface TitleDetails extends Title {
   runtimeMinutes: number | null;
   seasons: number | null;
   logoPath: string | null;
+  /** Width / height of the logo, so it can be laid out before it loads. */
+  logoAspectRatio: number | null;
   trailerKey: string | null;
   certification: string | null;
   cast: string[];
