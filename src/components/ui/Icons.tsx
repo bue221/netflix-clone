@@ -88,6 +88,18 @@ export const CloseIcon = (props: IconProps) => (
   </Icon>
 );
 
+export const VolumeOffIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M11 4.08a1 1 0 0 0-1.6-.8L5.67 6H2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3.67l3.73 2.72a1 1 0 0 0 1.6-.8V4.08ZM6.6 7.8 9 6.05v11.9L6.6 16.2a1 1 0 0 0-.6-.2H3V8h3a1 1 0 0 0 .6-.2Zm8.69 1.49L17.59 12l-2.3 2.29 1.42 1.42L19 13.41l2.29 2.3 1.42-1.42L20.41 12l2.3-2.29-1.42-1.42L19 10.59l-2.29-2.3-1.42 1.42Z" />
+  </Icon>
+);
+
+export const VolumeUpIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M11 4.08a1 1 0 0 0-1.6-.8L5.67 6H2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3.67l3.73 2.72a1 1 0 0 0 1.6-.8V4.08ZM6.6 7.8 9 6.05v11.9L6.6 16.2a1 1 0 0 0-.6-.2H3V8h3a1 1 0 0 0 .6-.2Zm8.99-.21a6 6 0 0 1 0 8.82l-1.36-1.47a4 4 0 0 0 0-5.88l1.36-1.47Zm2.72-2.94a10 10 0 0 1 0 14.7l-1.36-1.47a8 8 0 0 0 0-11.76l1.36-1.47Z" />
+  </Icon>
+);
+
 export const CaretDownIcon = (props: IconProps) => (
   <Icon {...props}>
     <path d="M7 10l5 5 5-5H7Z" />

@@ -46,12 +46,14 @@ export default function App() {
     setSelected(null);
   }
 
+  const detailsOpen = selected !== null;
   const actions = useMemo<TitleActions>(
     () => ({
       openDetails: (title: Title, options?: OpenDetailsOptions) =>
         setSelected({ title, autoplay: options?.autoplay ?? false }),
+      detailsOpen,
     }),
-    [],
+    [detailsOpen],
   );
   useEffect(() => {
     window.scrollTo({ top: 0 });

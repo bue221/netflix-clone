@@ -7,6 +7,8 @@ export interface OpenDetailsOptions {
 
 export interface TitleActions {
   openDetails(title: Title, options?: OpenDetailsOptions): void;
+  /** Background media (e.g. the billboard trailer) pauses while the details modal is open. */
+  detailsOpen: boolean;
 }
 
 export const TitleActionsContext = createContext<TitleActions | null>(null);

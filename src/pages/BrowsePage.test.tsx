@@ -23,7 +23,7 @@ function renderWith(service: Partial<CatalogService>, children: ReactNode) {
   const openDetails = vi.fn();
   render(
     <CatalogServiceContext value={service as CatalogService}>
-      <TitleActionsContext value={{ openDetails }}>{children}</TitleActionsContext>
+      <TitleActionsContext value={{ openDetails, detailsOpen: false }}>{children}</TitleActionsContext>
     </CatalogServiceContext>,
   );
   return { openDetails };
