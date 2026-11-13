@@ -10,6 +10,7 @@ interface TitleCardProps {
   title: Title;
   variant?: RowVariant;
   rank?: number;
+  tabIndex?: number;
 }
 
 const HOVER_INTENT_MS = 450;
@@ -59,7 +60,7 @@ function useHoverPreview(cardRef: React.RefObject<HTMLElement | null>) {
   return { anchor, leaving, scheduleOpen, enter, leave, close };
 }
 
-export function TitleCard({ title, variant = 'default', rank }: TitleCardProps) {
+export function TitleCard({ title, variant = 'default', rank, tabIndex }: TitleCardProps) {
   const { openDetails } = useTitleActions();
   const cardRef = useRef<HTMLButtonElement>(null);
   const preview = useHoverPreview(cardRef);
@@ -69,6 +70,7 @@ export function TitleCard({ title, variant = 'default', rank }: TitleCardProps) 
       <button
         ref={cardRef}
         type="button"
+        tabIndex={tabIndex}
         className={`${styles.card} ${styles[variant]}`}
         onClick={() => openDetails(title)}
         onPointerEnter={(event) => event.pointerType === 'mouse' && preview.scheduleOpen()}

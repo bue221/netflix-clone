@@ -29,6 +29,21 @@
   filter: brightness(1.12);
 }
 
+/* The row track clips overflow and the filtered image paints over outlines, so the ring is an overlay. */
+.card:focus-visible {
+  outline: none;
+}
+
+.card:focus-visible .art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border: 3px solid #fff;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
 .default .art {
   aspect-ratio: 16 / 9;
 }

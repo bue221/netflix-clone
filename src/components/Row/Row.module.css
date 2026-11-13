@@ -4,14 +4,21 @@
 
   position: relative;
   margin: 0 0 3vw;
+  /* Skip layout/paint of off-screen rows; `auto` remembers the real height once rendered. */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 100vw auto 14vw;
 }
 
 .poster {
   --items: 6;
+
+  contain-intrinsic-size: auto 100vw auto 28vw;
 }
 
 .top10 {
   --items: 5;
+
+  contain-intrinsic-size: auto 100vw auto 24vw;
 }
 
 .header {
