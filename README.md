@@ -1,68 +1,62 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Netflix clone
 
-## Available Scripts
+Catálogo de series y películas con la experiencia de Netflix, construido con React 19, TypeScript y Vite. Los datos e imágenes vienen de [TMDB](https://www.themoviedb.org).
 
-In the project directory, you can run:
+## Funcionalidades
 
-### `yarn start`
+- **Billboard** con el logo oficial del título, clasificación por edad, "% para ti" y efecto Ken Burns.
+- **Filas tipo carrusel** con scroll nativo (touch, trackpad y teclado), `scroll-snap`, flechas que avanzan una página completa e indicadores de página. Variantes Top 10 (números gigantes) y pósters ("Solo en Netflix").
+- **Vista previa al pasar el mouse** que crece desde la tarjeta, con acciones (reproducir, Mi lista, me gusta, más información).
+- **Modal de detalles** (`<dialog>` nativo): tráiler de YouTube, duración/temporadas, elenco, géneros y títulos recomendados.
+- **Secciones** Inicio, Series, Películas, Novedades populares y **Mi lista** (persistida en `localStorage`).
+- **Búsqueda** con debounce y cancelación de peticiones obsoletas.
+- **SEO**: título y descripción por vista, Open Graph/Twitter cards, JSON-LD, `robots.txt`, manifest PWA, favicons SVG/ICO/PNG.
+- Skeletons de carga, mensajes de error amigables con reintento, `prefers-reduced-motion` y navegación por teclado.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Requisitos
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- Node.js 22.12 o superior
+- Una API key de TMDB (gratuita): <https://www.themoviedb.org/settings/api>
 
-### `yarn test`
+## Puesta en marcha
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+cp .env.example .env.local   # y completa VITE_TMDB_API_KEY
+npm install
+npm run dev                  # http://localhost:5173
+```
 
-### `yarn build`
+| Variable             | Descripción                                                                  |
+| -------------------- | ---------------------------------------------------------------------------- |
+| `VITE_TMDB_API_KEY`  | API key v3 de TMDB (obligatoria).                                            |
+| `VITE_TMDB_LANGUAGE` | Idioma de títulos y sinopsis (por defecto `es-MX`).                          |
+| `VITE_SITE_URL`      | URL pública sin `/` final; activa `canonical`, `og:url` y `og:image` absolutos. |
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Scripts
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+| Comando             | Qué hace                                  |
+| ------------------- | ----------------------------------------- |
+| `npm run dev`       | Servidor de desarrollo con HMR.           |
+| `npm run build`     | Typecheck + build de producción en `dist`. |
+| `npm run preview`   | Sirve el build de producción.             |
+| `npm test`          | Tests con Vitest y Testing Library.       |
+| `npm run typecheck` | Solo verificación de tipos.               |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Arquitectura
 
-### `yarn eject`
+```
+src/
+  config/        variables de entorno tipadas
+  domain/        modelo Title y utilidades puras (formatos, géneros)
+  services/
+    tmdb/        cliente HTTP (timeout, reintentos, errores tipados) y mapeadores
+    catalog/     definiciones declarativas de cada sección y servicio de catálogo
+  state/         Mi lista (useSyncExternalStore) y acciones de título (contexto)
+  hooks/         carga asíncrona cancelable, scroll, debounce, metadatos SEO
+  components/    UI (Navbar, Billboard, Row, TitleCard, DetailModal, ...)
+  pages/         Browse, Search y MyList
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Para agregar una fila o sección basta con editar `src/services/catalog/definitions.ts`; los componentes no cambian.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+> Proyecto de estudio sin fines comerciales. Netflix es una marca registrada de Netflix, Inc. Este producto usa la API de TMDB pero no está avalado ni certificado por TMDB.
