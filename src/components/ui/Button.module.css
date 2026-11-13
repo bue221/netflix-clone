@@ -1,0 +1,84 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  padding: 0.55em 1.6em 0.55em 1.3em;
+  border: 0;
+  border-radius: 4px;
+  font-size: clamp(0.95rem, 1.1vw, 1.25rem);
+  font-weight: 700;
+  line-height: 1.6;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.button:active {
+  transform: scale(0.97);
+}
+
+.icon {
+  display: inline-flex;
+  font-size: 1.5em;
+}
+
+.primary {
+  background: #fff;
+  color: #000;
+}
+
+.primary:hover {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.secondary {
+  background: rgba(109, 109, 110, 0.7);
+  color: #fff;
+}
+
+.secondary:hover {
+  background: rgba(109, 109, 110, 0.4);
+}
+
+.round {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 2.25em;
+  height: 2.25em;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
+}
+
+.round > svg {
+  width: 55%;
+  height: 55%;
+}
+
+.round:active {
+  transform: scale(0.92);
+}
+
+.outline {
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  background: rgba(42, 42, 42, 0.6);
+  color: #fff;
+}
+
+.outline:hover {
+  border-color: #fff;
+}
+
+.solid {
+  border: 2px solid #fff;
+  background: #fff;
+  color: #000;
+}
+
+.solid:hover {
+  background: rgba(255, 255, 255, 0.8);
+}

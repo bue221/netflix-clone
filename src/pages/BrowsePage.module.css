@@ -1,0 +1,20 @@
+.rows {
+  position: relative;
+  z-index: 1;
+  margin-top: -8vw;
+  padding-bottom: 2rem;
+}
+
+.noBillboard {
+  margin-top: 0;
+}
+
+.spacer {
+  height: calc(68px + 2rem);
+}
+
+@media (max-width: 800px) {
+  .rows {
+    margin-top: -1.5rem;
+  }
+}

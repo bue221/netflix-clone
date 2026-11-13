@@ -1,0 +1,18 @@
+.status {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 6rem var(--nf-gutter) 4rem;
+  text-align: center;
+}
+
+.status h2 {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+}
+
+.status p {
+  color: var(--nf-text-muted);
+  line-height: 1.5;
+}

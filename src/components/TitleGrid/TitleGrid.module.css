@@ -1,0 +1,34 @@
+.section {
+  min-height: 70vh;
+  padding: calc(68px + 3rem) var(--nf-gutter) 3rem;
+}
+
+.heading {
+  margin-bottom: 1.5rem;
+  color: #e5e5e5;
+  font-size: clamp(1.25rem, 2vw, 2rem);
+  font-weight: 500;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(220px, 45%), 1fr));
+  gap: 2.5vw 0.4vw;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  animation: fadeUp 0.4s var(--nf-ease) both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@media (max-width: 800px) {
+  .grid {
+    gap: 1.25rem 0.5rem;
+  }
+}

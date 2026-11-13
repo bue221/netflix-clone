@@ -1,0 +1,339 @@
+.dialog {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 2rem 0;
+  border: 0;
+  overflow-y: auto;
+  background: transparent;
+  color: var(--nf-text);
+  overscroll-behavior: contain;
+}
+
+.dialog::backdrop {
+  background: rgba(0, 0, 0, 0.7);
+  animation: fadeIn 0.25s ease both;
+}
+
+.panel {
+  position: relative;
+  width: min(850px, 94vw);
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--nf-surface);
+  box-shadow: 0 3px 30px rgba(0, 0, 0, 0.75);
+  animation: modalIn 0.35s var(--nf-ease) both;
+}
+
+.closing .panel {
+  animation: modalOut 0.2s ease-in both;
+}
+
+.closing::backdrop {
+  animation: fadeOut 0.2s ease-in both;
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.94);
+  }
+}
+
+@keyframes modalOut {
+  to {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+.close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 3;
+  border-color: var(--nf-surface) !important;
+  background: var(--nf-surface) !important;
+  color: #fff !important;
+}
+
+.hero {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to top, var(--nf-surface) 0%, transparent 45%);
+}
+
+.hero:has(.trailer)::after {
+  display: none;
+}
+
+.backdrop {
+  width: 100%;
+  height: 100%;
+}
+
+.trailer {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.heroInfo {
+  position: absolute;
+  inset: auto 3rem 2.5rem;
+  z-index: 1;
+}
+
+.heroTitle {
+  max-width: 60%;
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-weight: 900;
+  line-height: 1;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.logo {
+  max-width: 100%;
+  max-height: 140px;
+  object-fit: contain;
+  object-position: left bottom;
+}
+
+.heroActions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+
+.heroActions > button:not(:first-child) {
+  font-size: 1.15rem;
+}
+
+.heroActions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.body {
+  padding: 0 3rem 3rem;
+}
+
+.inlineTitle {
+  padding-top: 1.5rem;
+  font-size: 1.75rem;
+  font-weight: 800;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 2rem;
+  padding-top: 1rem;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  color: #bcbcbc;
+  font-weight: 500;
+}
+
+.match {
+  margin-right: 0.5rem;
+  color: var(--nf-green);
+  font-weight: 700;
+}
+
+.badge {
+  padding: 0 0.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 3px;
+  font-size: 0.75rem;
+}
+
+.tagline {
+  margin-top: 1rem;
+  color: #e5e5e5;
+  font-style: italic;
+}
+
+.overview {
+  margin-top: 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.facts {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.facts > div + div {
+  margin-top: 0.75rem;
+}
+
+.facts dt {
+  display: inline;
+  color: #777;
+}
+
+.facts dd {
+  display: inline;
+  margin: 0;
+}
+
+.factsSkeleton {
+  height: 4rem;
+  border-radius: 4px;
+  background: #262626;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.similar {
+  margin-top: 2.5rem;
+}
+
+.similar h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.similar ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.similarCard {
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--nf-surface-2);
+}
+
+.similarMedia {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 0;
+  border: 0;
+  background: #000;
+  cursor: pointer;
+}
+
+.similarMedia img,
+.similarMedia > div {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s var(--nf-ease);
+}
+
+.similarMedia:hover img {
+  transform: scale(1.04);
+}
+
+.similarName {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 1.5rem 0.6rem 0.4rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+  font-weight: 800;
+  text-align: left;
+}
+
+.similarBody {
+  padding: 0.9rem;
+}
+
+.similarMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  color: #bcbcbc;
+  font-size: 0.9rem;
+}
+
+.similarBody p {
+  display: -webkit-box;
+  overflow: hidden;
+  color: #d2d2d2;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+}
+
+.error {
+  display: grid;
+  justify-items: start;
+  gap: 1rem;
+  padding: 4rem 3rem 3rem;
+}
+
+@media (max-width: 700px) {
+  .dialog {
+    padding: 0;
+  }
+
+  .panel {
+    width: 100%;
+    min-height: 100%;
+    border-radius: 0;
+  }
+
+  .heroInfo {
+    inset: auto 1.25rem 1.25rem;
+  }
+
+  .heroTitle {
+    max-width: 80%;
+  }
+
+  .body {
+    padding: 0 1.25rem 2rem;
+  }
+
+  .columns {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}

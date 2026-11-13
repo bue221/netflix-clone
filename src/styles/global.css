@@ -1,0 +1,101 @@
+:root {
+  --nf-red: #e50914;
+  --nf-red-dark: #b20710;
+  --nf-bg: #141414;
+  --nf-surface: #181818;
+  --nf-surface-2: #2f2f2f;
+  --nf-text: #fff;
+  --nf-text-muted: #b3b3b3;
+  --nf-text-dim: #808080;
+  --nf-green: #46d369;
+  --nf-gutter: 4%;
+  --nf-ease: cubic-bezier(0.5, 0, 0.1, 1);
+  --nf-font: 'Netflix Sans', 'Helvetica Neue', Helvetica, Roboto, 'Segoe UI', Arial, sans-serif;
+
+  color-scheme: dark;
+  font-family: var(--nf-font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scrollbar-gutter: stable;
+  background: var(--nf-bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--nf-bg);
+  color: var(--nf-text);
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 1rem;
+  z-index: 10000;
+  padding: 0.75rem 1rem;
+  background: #fff;
+  color: #000;
+  font-weight: 700;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

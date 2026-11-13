@@ -1,0 +1,278 @@
+.navbar {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 2.5rem);
+  height: 68px;
+  padding: 0 var(--nf-gutter);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 10%, transparent);
+  transition: background-color 0.4s ease;
+  font-size: 0.875rem;
+}
+
+.solid {
+  background-color: var(--nf-bg);
+}
+
+.logo {
+  display: flex;
+  flex: none;
+  color: var(--nf-red);
+}
+
+.logo svg {
+  width: clamp(80px, 7vw, 93px);
+  height: auto;
+}
+
+.primary {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.links {
+  display: flex;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.links a {
+  color: #e5e5e5;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.4s ease;
+}
+
+.links a:hover {
+  color: var(--nf-text-muted);
+}
+
+.links a[aria-current='page'] {
+  color: #fff;
+  font-weight: 700;
+  cursor: default;
+}
+
+.browse {
+  display: none;
+}
+
+.browseTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 700;
+}
+
+.browsePanel {
+  left: 50% !important;
+  right: auto !important;
+  translate: -50% 0;
+  width: 260px;
+  border-top: 2px solid #e5e5e5;
+}
+
+.browseList {
+  margin: 0;
+  padding: 0.5rem 0;
+  list-style: none;
+  text-align: center;
+}
+
+.browseList a {
+  display: block;
+  padding: 0.85rem 1rem;
+  color: var(--nf-text-muted);
+  text-decoration: none;
+}
+
+.browseList a:hover,
+.browseList a[aria-current='page'] {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-weight: 700;
+}
+
+.secondary {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 1.5vw, 1.25rem);
+  margin-left: auto;
+}
+
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.kids {
+  color: #e5e5e5;
+}
+
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid transparent;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.search input {
+  width: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  transition: width 0.3s var(--nf-ease), padding 0.3s var(--nf-ease);
+}
+
+.search input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.searchOpen {
+  padding: 0.25rem 0.5rem;
+  border-color: rgba(255, 255, 255, 0.85);
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.searchOpen input {
+  width: clamp(140px, 18vw, 240px);
+  padding: 0.15rem 1.75rem 0.15rem 0.5rem;
+}
+
+.clear {
+  position: absolute;
+  right: 0.5rem;
+  display: inline-flex;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.panel {
+  position: absolute;
+  top: calc(100% + 18px);
+  right: 0;
+  min-width: 200px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.9);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  animation: panelIn 0.18s ease-out;
+}
+
+.panel::before {
+  content: '';
+  position: absolute;
+  inset: -20px 0 auto;
+  height: 20px;
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+.notifications {
+  width: 280px;
+}
+
+.empty {
+  padding: 1.25rem;
+  color: var(--nf-text-muted);
+}
+
+.profile {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  flex: none;
+}
+
+.caret {
+  transition: transform 0.3s ease;
+}
+
+.dropdown:has([data-open='true']) .caret {
+  transform: rotate(180deg);
+}
+
+.menu {
+  margin: 0;
+  padding: 0.5rem 0;
+  list-style: none;
+}
+
+.menu li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+}
+
+.menu a {
+  text-decoration: none;
+}
+
+.menu a:hover {
+  text-decoration: underline;
+}
+
+.profileRow {
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .links {
+    display: none;
+  }
+
+  .browse {
+    display: block;
+  }
+
+  .kids {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .navbar {
+    height: 56px;
+  }
+
+  .notifications,
+  .dropdown:has(.notifications) {
+    display: none;
+  }
+}

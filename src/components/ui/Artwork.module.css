@@ -1,0 +1,21 @@
+.image {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: var(--nf-surface);
+  object-fit: cover;
+}
+
+.loaded {
+  opacity: 1;
+}
+
+.fallback {
+  display: grid;
+  place-items: center;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #2a2a2a, #181818);
+  color: var(--nf-text-muted);
+  font-weight: 700;
+  text-align: center;
+  font-size: 0.9rem;
+}
