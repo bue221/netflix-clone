@@ -22,6 +22,8 @@ function absoluteUrlTags(siteUrl: string): Plugin {
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), 'VITE_');
   return {
+    // GitHub Pages serves the site from /<repo>/, so the deploy workflow sets VITE_BASE_PATH.
+    base: env.VITE_BASE_PATH || '/',
     plugins: [react(), absoluteUrlTags(env.VITE_SITE_URL ?? '')],
     build: {
       target: 'es2022',

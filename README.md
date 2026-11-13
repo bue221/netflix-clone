@@ -42,6 +42,12 @@ npm run dev                  # http://localhost:5173
 | `npm test`          | Tests con Vitest y Testing Library.       |
 | `npm run typecheck` | Solo verificación de tipos.               |
 
+## Despliegue
+
+Cada push a `master` ejecuta `.github/workflows/deploy.yml`: corre los tests, compila con la ruta base de GitHub Pages y publica en <https://bue221.github.io/netflix-clone/>. Requiere el secret `VITE_TMDB_API_KEY` en el repositorio y Pages configurado con la fuente "GitHub Actions".
+
+La key de TMDB v3 queda embebida en el bundle del navegador (así funciona la API desde el cliente), así que usa una key exclusiva para este sitio.
+
 ## Arquitectura
 
 ```
