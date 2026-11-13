@@ -43,6 +43,9 @@ export interface TmdbDetails extends TmdbListItem {
   images?: { logos?: TmdbImage[] };
   videos?: { results?: TmdbVideo[] };
   credits?: { cast?: { name: string; order: number }[] };
+  translations?: {
+    translations?: { iso_639_1: string; iso_3166_1: string; data?: { overview?: string } }[];
+  };
   recommendations?: TmdbPage<TmdbListItem>;
   similar?: TmdbPage<TmdbListItem>;
   content_ratings?: { results?: { iso_3166_1: string; rating: string }[] };

@@ -74,6 +74,24 @@ describe('toTitleDetails', () => {
     expect(movie.certification).toBe('B15');
   });
 
+  it('falls back to another Spanish variant, then English, when the synopsis is missing', () => {
+    const translations = (entries: [string, string, string][]) => ({
+      translations: entries.map(([iso_639_1, iso_3166_1, overview]) => ({ iso_639_1, iso_3166_1, data: { overview } })),
+    });
+    const options = { language: 'es-MX', region: 'MX' };
+
+    expect(toTitleDetails({ ...base, overview: 'Local' }, 'tv', options).overview).toBe('Local');
+    expect(
+      toTitleDetails({ ...base, overview: '', translations: translations([['en', 'US', 'English'], ['es', 'ES', 'Castellano']]) }, 'tv', options)
+        .overview,
+    ).toBe('Castellano');
+    expect(
+      toTitleDetails({ ...base, overview: '', translations: translations([['es', 'ES', ''], ['en', 'US', 'English']]) }, 'tv', options)
+        .overview,
+    ).toBe('English');
+    expect(toTitleDetails({ ...base, overview: '' }, 'tv', options).overview).toBe('');
+  });
+
   it('uses recommendations first and similar titles as fallback', () => {
     const withBoth = toTitleDetails(
       {

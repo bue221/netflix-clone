@@ -59,6 +59,18 @@ function pickCertification(details: TmdbDetails, region: string): string | null 
   return null;
 }
 
+/** TMDB often lacks a localized synopsis; fall back to another variant of the language, then English. */
+function pickOverview(details: TmdbDetails, language: string): string {
+  if (details.overview?.trim()) return details.overview;
+  const lang = language.split('-')[0];
+  const translations = (details.translations?.translations ?? []).filter((entry) => entry.data?.overview?.trim());
+  const best =
+    translations.find((entry) => entry.iso_639_1 === lang) ??
+    translations.find((entry) => entry.iso_639_1 === 'en' && entry.iso_3166_1 === 'US') ??
+    translations.find((entry) => entry.iso_639_1 === 'en');
+  return best?.data?.overview ?? '';
+}
+
 export function toTitleDetails(
   details: TmdbDetails,
   mediaType: MediaType,
@@ -67,6 +79,7 @@ export function toTitleDetails(
   const base = toTitle({ ...details, media_type: mediaType }, mediaType) as Title;
   return {
     ...base,
+    overview: pickOverview(details, language),
     genres: (details.genres ?? []).map((genre) => genre.name),
     tagline: details.tagline ?? '',
     runtimeMinutes: details.runtime ?? details.episode_run_time?.[0] ?? null,

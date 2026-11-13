@@ -122,7 +122,7 @@ export function createCatalogService({
       // unmounting must not cancel the response other consumers are waiting for.
       const request = client
         .get<TmdbDetails>(`/${mediaType}/${id}`, {
-          append_to_response: `images,videos,credits,recommendations,similar,${mediaType === 'tv' ? 'content_ratings' : 'release_dates'}`,
+          append_to_response: `images,videos,credits,recommendations,similar,translations,${mediaType === 'tv' ? 'content_ratings' : 'release_dates'}`,
           include_image_language: `${language.split('-')[0]},en,null`,
           include_video_language: `${language.split('-')[0]},en`,
         })
